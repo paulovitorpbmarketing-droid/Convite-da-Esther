@@ -1,0 +1,31 @@
+.rsvp-section { padding-top: 48px; }
+form {
+  margin-top: 30px; padding: 24px; text-align: left;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  background: var(--card); border: 1px solid rgba(255,255,255,.85); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field.full { grid-column: 1 / -1; }
+label, legend { font-size: .9rem; font-weight: 800; }
+label span { color: var(--muted); font-weight: 500; }
+input, textarea {
+  width: 100%; border: 1px solid var(--line); outline: none;
+  border-radius: 16px; background: rgba(255,255,255,.75); color: var(--text);
+  padding: 14px 15px; transition: border-color .18s ease, box-shadow .18s ease;
+}
+input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(232,167,194,.18); }
+textarea { resize: vertical; min-height: 110px; }
+fieldset { border: 0; padding: 0; margin: 0; }
+.choice-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.choice { display: flex; gap: 9px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.58); cursor: pointer; }
+.choice input { width: auto; accent-color: var(--accent-strong); }
+.people-fields { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.people-fields[hidden] { display: none; }
+.form-note { grid-column: 1 / -1; margin: 2px 0; color: var(--muted); font-size: .8rem; }
+.submit-button { grid-column: 1 / -1; width: 100%; }
+.submit-button[disabled] { opacity: .62; cursor: wait; }
+.form-status { grid-column: 1 / -1; min-height: 0; border-radius: 16px; font-size: .9rem; text-align: center; }
+.form-status.success, .form-status.error { padding: 12px 14px; }
+.form-status.success { background: rgba(90,143,111,.12); color: #355f46; }
+.form-status.error { background: rgba(173,72,72,.10); color: #803f3f; }
+.hp-field { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
