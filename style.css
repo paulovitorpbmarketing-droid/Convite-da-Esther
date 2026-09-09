@@ -878,6 +878,10 @@ footer span {
     --shadow: 0 14px 38px rgba(166, 96, 128, .1);
   }
 
+  html {
+    scroll-behavior: auto;
+  }
+
   .section {
     width: min(calc(100% - 26px), 920px);
     padding: 72px 0;
@@ -1027,6 +1031,7 @@ footer span {
   .landing-butterfly .wing {
     width: 23px;
     height: 27px;
+    animation-duration: .34s;
   }
 
   footer {
