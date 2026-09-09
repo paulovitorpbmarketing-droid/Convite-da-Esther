@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fff7fb" />
+  <meta name="description" content="Convite para o primeiro aniversário da Esther Vitória" />
+  <title>Esther Vitória • 1 aninho</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero section" id="inicio">
+      <div class="sparkles" aria-hidden="true">
+        <span>✦</span><span>·</span><span>✧</span><span>·</span><span>✦</span>
+      </div>
+
+      <p class="eyebrow">UM CONVITE MUITO ESPECIAL</p>
+      <div class="photo-frame" id="photoFrame" hidden>
+        <img id="babyPhoto" alt="Foto da criança" />
+      </div>
+      <div class="baby-icon" id="babyIcon" aria-hidden="true"><span class="mini-bow">♡</span><strong>1</strong></div>
+
+      <h1><span id="babyName">Esther Vitória</span></h1>
+      <p class="age-line">vai comemorar seu <strong id="babyAge">1 aninho</strong>!</p>
+      <p class="hero-copy" id="heroMessage">
+        Um aninho de amor, descobertas e muitos sorrisos. Venha celebrar esse dia especial com a Esther Vitória e sua família.
+      </p>
+      <a class="button primary" href="#confirmacao">Confirmar presença</a>
+    </header>
+
+    <main>
+      <section class="section countdown-section" aria-labelledby="countdownTitle">
+        <p class="eyebrow">FALTA POUCO</p>
+        <h2 id="countdownTitle">Para o grande dia</h2>
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div><strong id="days">00</strong><span>dias</span></div>
+          <div><strong id="hours">00</strong><span>horas</span></div>
+          <div><strong id="minutes">00</strong><span>min</span></div>
+          <div><strong id="seconds">00</strong><span>seg</span></div>
+        </div>
+        <p class="event-over" id="eventOver" hidden>O grande dia chegou! 🎉</p>
+      </section>
+
+      <section class="section details-section" aria-labelledby="detailsTitle">
+        <p class="eyebrow">ANOTE AÍ</p>
+        <h2 id="detailsTitle">Detalhes da festa</h2>
+        <div class="details-grid">
+          <article class="detail-card">
+            <span class="detail-icon" aria-hidden="true">◷</span>
+            <h3>Quando</h3>
+            <p id="dateText">02 de outubro de 2026</p>
+            <p id="timeText">Horário em breve</p>
+          </article>
+          <article class="detail-card">
+            <span class="detail-icon" aria-hidden="true">⌖</span>
+            <h3>Onde</h3>
+            <p id="venueName">Local em breve</p>
+            <p id="venueAddress">O endereço será informado assim que estiver definido.</p>
+          </article>
+        </div>
+        <a class="button secondary" id="mapsButton" href="#" target="_blank" rel="noopener noreferrer" hidden>Abrir no mapa</a>
+      </section>
+
+      <section class="section note-section">
+        <div class="note-card">
+          <span class="note-symbol" aria-hidden="true">♡</span>
+          <p class="eyebrow">COM CARINHO</p>
+          <h2>Um aninho merece uma comemoração cheia de carinho</h2>
+          <p id="giftMessage">Sua presença será o carinho mais bonito nesse primeiro aniversário da Esther Vitória.</p>
+        </div>
+      </section>
+
+      <section class="section rsvp-section" id="confirmacao" aria-labelledby="rsvpTitle">
+        <p class="eyebrow">RSVP</p>
+        <h2 id="rsvpTitle">Confirme sua presença</h2>
+        <p class="section-intro">Ajude a família a preparar tudo com carinho informando quem vai participar.</p>
+
+        <form id="rsvpForm" novalidate>
+          <div class="field full">
+            <label for="name">Seu nome</label>
+            <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required placeholder="Ex.: Ana Souza" />
+          </div>
+
+          <fieldset class="field full presence-field">
+            <legend>Você poderá comparecer?</legend>
+            <div class="choice-row">
+              <label class="choice">
+                <input type="radio" name="attendance" value="Sim" checked />
+                <span>Sim, estarei lá</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="attendance" value="Não" />
+                <span>Não poderei ir</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="people-fields" id="peopleFields">
+            <div class="field">
+              <label for="adults">Adultos</label>
+              <input id="adults" name="adults" type="number" inputmode="numeric" min="0" max="20" value="1" required />
+            </div>
+            <div class="field">
+              <label for="children">Crianças</label>
+              <input id="children" name="children" type="number" inputmode="numeric" min="0" max="20" value="0" required />
+            </div>
+          </div>
+
+          <div class="hp-field" aria-hidden="true">
+            <label for="website">Não preencha este campo</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field full">
+            <label for="message">Recadinho <span>(opcional)</span></label>
+            <textarea id="message" name="message" rows="4" maxlength="300" placeholder="Deixe uma mensagem para a família"></textarea>
+          </div>
+
+          <p class="form-note">Ao enviar, sua resposta será registrada na lista privada da família.</p>
+          <button class="button primary submit-button" id="submitButton" type="submit">Enviar confirmação</button>
+          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>Feito com carinho para um dia inesquecível ♡</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
