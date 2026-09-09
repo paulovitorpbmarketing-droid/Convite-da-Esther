@@ -1,0 +1,95 @@
+/* Divisão suave de cores entre as seções — Jardim Encantado */
+main > .section,
+.hero.section {
+  isolation: isolate;
+}
+
+main > .section::before,
+.hero.section::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Primeira tela: clara, preservando o esfumado rosa das bordas */
+.hero.section::before {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(239,182,207,.15), transparent 26%),
+    radial-gradient(circle at 82% 68%, rgba(159,222,214,.10), transparent 28%),
+    rgba(255,253,253,.78);
+}
+
+/* Introdução: rosa muito suave */
+.intro-garden::before {
+  background:
+    radial-gradient(circle at 12% 30%, rgba(239,182,207,.22), transparent 32%),
+    linear-gradient(180deg, #fff9fc 0%, #fdf0f6 50%, #fff9fc 100%);
+}
+
+/* Contagem: creme/amarelo delicado */
+.countdown-section::before {
+  background:
+    radial-gradient(circle at 85% 22%, rgba(242,221,160,.26), transparent 31%),
+    linear-gradient(180deg, #fffdf8 0%, #fff7df 52%, #fffdf8 100%);
+}
+
+/* Data e local: verde-água bem claro */
+.details-section::before {
+  background:
+    radial-gradient(circle at 14% 72%, rgba(159,222,214,.24), transparent 32%),
+    linear-gradient(180deg, #fbfffe 0%, #eefaf8 52%, #fbfffe 100%);
+}
+
+/* Mensagem: rosa mais presente, ainda pastel */
+.note-section::before {
+  background:
+    radial-gradient(circle at 84% 35%, rgba(239,182,207,.28), transparent 32%),
+    linear-gradient(180deg, #fff8fb 0%, #fbe7f0 52%, #fff8fb 100%);
+}
+
+/* Confirmação: mistura rosa + verde-água */
+.rsvp-section::before {
+  background:
+    radial-gradient(circle at 8% 18%, rgba(159,222,214,.19), transparent 30%),
+    radial-gradient(circle at 92% 82%, rgba(239,182,207,.22), transparent 32%),
+    linear-gradient(180deg, #fffefd 0%, #f8fbf9 100%);
+}
+
+/* Separadores finos para a troca de seção parecer intencional */
+main > .section:not(:first-child) {
+  border-top: 1px solid rgba(174,124,146,.06);
+}
+
+/* Footer acompanha o rosa do convite */
+footer {
+  position: relative;
+  background: linear-gradient(180deg, rgba(251,231,240,.54), rgba(249,220,233,.78));
+}
+
+@media (max-width: 560px) {
+  .intro-garden::before {
+    background: linear-gradient(180deg, #fff9fc 0%, #fcecf4 55%, #fff9fc 100%);
+  }
+
+  .countdown-section::before {
+    background: linear-gradient(180deg, #fffdf8 0%, #fff6dc 55%, #fffdf8 100%);
+  }
+
+  .details-section::before {
+    background: linear-gradient(180deg, #fbfffe 0%, #eaf8f5 55%, #fbfffe 100%);
+  }
+
+  .note-section::before {
+    background: linear-gradient(180deg, #fff7fb 0%, #f9e2ed 55%, #fff7fb 100%);
+  }
+
+  .rsvp-section::before {
+    background: linear-gradient(180deg, #fffefd 0%, #f1faf7 48%, #fff5f9 100%);
+  }
+}
