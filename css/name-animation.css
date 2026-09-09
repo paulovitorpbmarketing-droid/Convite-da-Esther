@@ -1,0 +1,9 @@
+.animated-name{display:inline-flex;justify-content:center;align-items:baseline;flex-wrap:wrap;position:relative}
+.name-letter,.name-space{display:inline-block}
+.name-letter{opacity:0;transform:translateY(18px) scale(.94);filter:blur(4px);animation:nameReveal .7s cubic-bezier(.2,.75,.25,1) forwards;animation-delay:calc(.45s + (var(--i) * .18s));will-change:opacity,transform,filter}
+.name-space{width:.28em}
+@keyframes nameReveal{0%{opacity:0;transform:translateY(18px) scale(.94);filter:blur(4px)}65%{opacity:1;transform:translateY(-2px) scale(1.015);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+/* A borboleta espera o nome terminar de aparecer antes de pousar. */
+.landing-butterfly{animation-delay:3.15s!important}
+@media(max-width:560px){.name-letter{animation-delay:calc(.35s + (var(--i) * .16s));animation-duration:.65s}.landing-butterfly{animation-delay:2.8s!important}}
+@media(prefers-reduced-motion:reduce){.name-letter{opacity:1;transform:none;filter:none;animation:none}.landing-butterfly{animation:none!important;opacity:1;transform:none}}
