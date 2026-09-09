@@ -18,6 +18,8 @@
 }
 
 html {
+  max-width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 24px;
 }
@@ -25,7 +27,8 @@ html {
 body {
   position: relative;
   margin: 0;
-  min-width: 320px;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: hidden;
   color: var(--text);
   background: var(--paper);
@@ -33,6 +36,13 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
 }
 
 button,
@@ -133,21 +143,25 @@ h3 {
 }
 
 .pink-haze-left {
-  left: -9vw;
+  left: 0;
   background: radial-gradient(ellipse at left center, rgba(239, 182, 207, .7), rgba(249, 220, 233, .24) 48%, transparent 76%);
 }
 
 .pink-haze-right {
-  right: -9vw;
+  right: 0;
   background: radial-gradient(ellipse at right center, rgba(239, 182, 207, .68), rgba(249, 220, 233, .22) 48%, transparent 76%);
 }
 
 /* Primeira tela */
 .hero {
+  width: 100%;
   min-height: 100svh;
   display: grid;
   place-items: center;
   align-content: center;
+  overflow: hidden;
+  overflow: clip;
+  padding-inline: 20px;
   padding-top: max(58px, env(safe-area-inset-top));
   padding-bottom: max(88px, calc(env(safe-area-inset-bottom) + 68px));
 }
@@ -615,10 +629,15 @@ fieldset {
 
 .hp-field {
   position: absolute !important;
-  left: -10000px !important;
   width: 1px !important;
   height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
   overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 footer {
@@ -646,14 +665,16 @@ footer span {
 .butterfly-field {
   position: absolute;
   z-index: 3;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 100vw;
+  inset: 0;
   overflow: hidden;
   pointer-events: none;
-  transform: translateX(-50%);
   contain: layout paint style;
+}
+
+.hero.is-offscreen .butterfly,
+.hero.is-offscreen .wing,
+.hero.is-offscreen .text-link span {
+  animation-play-state: paused !important;
 }
 
 .butterfly {
@@ -863,6 +884,7 @@ footer span {
   }
 
   .hero {
+    padding-inline: 13px;
     min-height: 100svh;
     padding-top: max(38px, calc(env(safe-area-inset-top) + 22px));
     padding-bottom: max(78px, calc(env(safe-area-inset-bottom) + 64px));
@@ -979,10 +1001,15 @@ footer span {
     height: 30px;
   }
 
+  .butterfly-field .fly-3 {
+    display: none;
+  }
+
   .butterfly-field .wing {
     width: 20px;
     height: 24px;
     background: currentColor;
+    animation-duration: .34s;
   }
 
   .butterfly-field .butterfly-body {

@@ -137,3 +137,14 @@ function startCountdown() {
     if (!update()) window.clearInterval(timer);
   }, 1000);
 }
+
+function setupHeroMotion() {
+  const hero = document.querySelector(".hero");
+  if (!hero || typeof IntersectionObserver !== "function") return;
+
+  const observer = new IntersectionObserver(([entry]) => {
+    hero.classList.toggle("is-offscreen", !entry.isIntersecting);
+  }, { threshold: 0 });
+
+  observer.observe(hero);
+}
