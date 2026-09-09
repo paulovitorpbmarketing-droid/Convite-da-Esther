@@ -1,60 +1,98 @@
+function splitGraphemes(text) {
+  if (typeof Intl !== "undefined" && typeof Intl.Segmenter === "function") {
+    const segmenter = new Intl.Segmenter("pt-BR", { granularity: "grapheme" });
+    return Array.from(segmenter.segment(text), part => part.segment);
+  }
+
+  return Array.from(text);
+}
+
 function renderAnimatedName(name) {
   const element = document.getElementById("babyName");
+  if (!element) return;
 
-  element.classList.remove("is-revealing");
-  element.textContent = "";
+  const words = String(name || "").trim().split(/\s+/).filter(Boolean);
+  const fragment = document.createDocumentFragment();
+  const letters = [];
+  let letterIndex = 0;
+
+  element.className = "animated-name";
   element.setAttribute("aria-label", name);
-  element.classList.add("animated-name");
 
-  [...name].forEach((char, index) => {
-    const span = document.createElement("span");
-    span.setAttribute("aria-hidden", "true");
-    span.style.setProperty("--i", index);
+  words.forEach(word => {
+    const wordElement = document.createElement("span");
+    wordElement.className = "name-word";
+    wordElement.setAttribute("aria-hidden", "true");
 
-    if (char === " ") {
-      span.className = "name-space";
-      span.innerHTML = "&nbsp;";
-    } else {
-      span.className = "name-letter";
-      span.textContent = char;
-    }
+    splitGraphemes(word).forEach(character => {
+      const letter = document.createElement("span");
+      letter.className = "name-letter";
+      letter.textContent = character;
+      letter.style.setProperty("--letter-delay", `${180 + letterIndex * 120}ms`);
+      wordElement.appendChild(letter);
+      letters.push(letter);
+      letterIndex += 1;
+    });
 
-    element.appendChild(span);
+    fragment.appendChild(wordElement);
   });
 
-  // Força o navegador a renderizar o estado inicial antes de iniciar a animação.
-  void element.offsetWidth;
+  element.replaceChildren(fragment);
+
+  const finish = () => element.classList.add("is-complete");
+  const lastLetter = letters[letters.length - 1];
+
+  if (lastLetter) {
+    lastLetter.addEventListener("animationend", finish, { once: true });
+    window.setTimeout(finish, 3000);
+  } else {
+    finish();
+  }
+
   requestAnimationFrame(() => {
     requestAnimationFrame(() => element.classList.add("is-revealing"));
   });
 }
 
+function setText(id, value) {
+  const element = document.getElementById(id);
+  if (element) element.textContent = value;
+}
+
 function applyConfig() {
-  document.title = `Convite • ${CONFIG.babyName}`;
+  document.title = `Jardim Encantado • ${CONFIG.babyName}`;
   renderAnimatedName(CONFIG.babyName);
-  document.getElementById("babyAge").textContent = CONFIG.babyAge;
-  document.getElementById("heroMessage").textContent = CONFIG.heroMessage;
-  document.getElementById("dateText").textContent = CONFIG.dateText;
-  document.getElementById("timeText").textContent = CONFIG.timeText;
-  document.getElementById("venueName").textContent = CONFIG.venueName;
-  document.getElementById("venueAddress").textContent = CONFIG.venueAddress;
-  document.getElementById("giftMessage").textContent = CONFIG.giftMessage;
+
+  setText("babyAge", CONFIG.babyAge);
+  setText("heroMessage", CONFIG.heroMessage);
+  setText("dateText", CONFIG.dateText);
+  setText("timeText", CONFIG.timeText);
+  setText("venueName", CONFIG.venueName);
+  setText("venueAddress", CONFIG.venueAddress);
+  setText("giftMessage", CONFIG.giftMessage);
 
   const mapsButton = document.getElementById("mapsButton");
-  if (CONFIG.mapsUrl) {
-    mapsButton.href = CONFIG.mapsUrl;
-    mapsButton.hidden = false;
-  } else {
-    mapsButton.hidden = true;
+  if (mapsButton) {
+    if (CONFIG.mapsUrl) {
+      mapsButton.href = CONFIG.mapsUrl;
+      mapsButton.hidden = false;
+    } else {
+      mapsButton.hidden = true;
+    }
   }
 
   if (CONFIG.babyPhoto) {
     const frame = document.getElementById("photoFrame");
     const image = document.getElementById("babyPhoto");
-    image.src = CONFIG.babyPhoto;
-    image.alt = `Foto de ${CONFIG.babyName}`;
-    frame.hidden = false;
-    document.getElementById("babyIcon").hidden = true;
+    const icon = document.getElementById("babyIcon");
+
+    if (frame && image) {
+      image.src = CONFIG.babyPhoto;
+      image.alt = `Foto de ${CONFIG.babyName}`;
+      frame.hidden = false;
+    }
+
+    if (icon) icon.hidden = true;
   }
 }
 
@@ -69,26 +107,33 @@ function startCountdown() {
 
   function update() {
     const distance = target - Date.now();
+
     if (!Number.isFinite(target) || distance <= 0) {
-      Object.values(parts).forEach(el => el.textContent = "00");
-      document.getElementById("eventOver").hidden = false;
+      Object.values(parts).forEach(element => {
+        if (element) element.textContent = "00";
+      });
+
+      const eventOver = document.getElementById("eventOver");
+      if (eventOver) eventOver.hidden = false;
       return false;
     }
 
-    const days = Math.floor(distance / 86400000);
-    const hours = Math.floor((distance % 86400000) / 3600000);
-    const minutes = Math.floor((distance % 3600000) / 60000);
-    const seconds = Math.floor((distance % 60000) / 1000);
+    const values = {
+      days: Math.floor(distance / 86400000),
+      hours: Math.floor((distance % 86400000) / 3600000),
+      minutes: Math.floor((distance % 3600000) / 60000),
+      seconds: Math.floor((distance % 60000) / 1000)
+    };
 
-    parts.days.textContent = String(days).padStart(2, "0");
-    parts.hours.textContent = String(hours).padStart(2, "0");
-    parts.minutes.textContent = String(minutes).padStart(2, "0");
-    parts.seconds.textContent = String(seconds).padStart(2, "0");
+    Object.entries(values).forEach(([key, value]) => {
+      if (parts[key]) parts[key].textContent = String(value).padStart(2, "0");
+    });
+
     return true;
   }
 
   update();
-  const timer = setInterval(() => {
-    if (!update()) clearInterval(timer);
+  const timer = window.setInterval(() => {
+    if (!update()) window.clearInterval(timer);
   }, 1000);
 }

@@ -1,10 +1,62 @@
-.animated-name{display:inline-flex;justify-content:center;align-items:baseline;flex-wrap:wrap;position:relative}
-.name-letter,.name-space{display:inline-block}
-.name-letter{opacity:0;transform:translateY(22px) scale(.92);filter:blur(5px)}
-.name-space{width:.28em}
-.animated-name.is-revealing .name-letter{animation:nameReveal .78s cubic-bezier(.18,.78,.22,1) both;animation-delay:calc(.38s + (var(--i) * .19s));will-change:opacity,transform,filter}
-@keyframes nameReveal{0%{opacity:0;transform:translateY(22px) scale(.92);filter:blur(5px)}58%{opacity:1;transform:translateY(-3px) scale(1.025);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
-/* A borboleta entra somente depois que o nome terminou de aparecer. */
-.landing-butterfly{animation-delay:3.65s!important}
-@media(max-width:560px){.animated-name.is-revealing .name-letter{animation-delay:calc(.3s + (var(--i) * .17s));animation-duration:.72s}.landing-butterfly{animation-delay:3.2s!important}}
-@media(prefers-reduced-motion:reduce){.name-letter{opacity:1;transform:none;filter:none}.animated-name.is-revealing .name-letter{animation:none}.landing-butterfly{animation:none!important;opacity:1;transform:none}}
+.animated-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: .03em .2em;
+  position: relative;
+}
+
+.name-word {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.name-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, .48em, 0) rotate(2deg) scale(.92);
+  transform-origin: 50% 85%;
+}
+
+.animated-name.is-revealing .name-letter {
+  animation: letter-bloom .68s cubic-bezier(.2, .76, .24, 1) both;
+  animation-delay: var(--letter-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.animated-name.is-complete .name-letter {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+@keyframes letter-bloom {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, .48em, 0) rotate(2deg) scale(.92);
+  }
+  62% {
+    opacity: 1;
+    transform: translate3d(0, -.045em, 0) rotate(-.6deg) scale(1.018);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0) scale(1);
+  }
+}
+
+@media (max-width: 700px) {
+  .animated-name {
+    gap: .02em .16em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-letter,
+  .animated-name.is-revealing .name-letter {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}
