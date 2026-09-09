@@ -7,31 +7,28 @@
   <meta name="color-scheme" content="light" />
   <meta name="description" content="Convite para o Jardim Encantado do primeiro aniversário da Esther Vitória" />
   <title>Jardim Encantado da Esther Vitória • 1 aninho</title>
-  <link rel="stylesheet" href="style.css?v=20" />
-  <link rel="stylesheet" href="css/section-colors.css?v=20" />
-  <link rel="stylesheet" href="css/name-animation.css?v=20" />
+  <link rel="stylesheet" href="style.css?v=21" />
+  <link rel="stylesheet" href="css/section-colors.css?v=21" />
+  <link rel="stylesheet" href="css/name-animation.css?v=21" />
 </head>
 <body>
   <div class="pink-haze pink-haze-left" aria-hidden="true"></div>
   <div class="pink-haze pink-haze-right" aria-hidden="true"></div>
 
-  <div class="butterfly-field" aria-hidden="true">
-    <div class="butterfly butterfly--aqua fly-1">
-      <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
-    </div>
-    <div class="butterfly butterfly--yellow fly-2">
-      <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
-    </div>
-    <div class="butterfly butterfly--pink fly-3">
-      <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
-    </div>
-    <div class="butterfly butterfly--mint fly-4">
-      <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
-    </div>
-  </div>
-
   <div class="page-shell">
     <header class="hero section" id="inicio">
+      <div class="butterfly-field" aria-hidden="true">
+        <div class="butterfly butterfly--aqua fly-1">
+          <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
+        </div>
+        <div class="butterfly butterfly--yellow fly-2">
+          <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
+        </div>
+        <div class="butterfly butterfly--pink fly-3">
+          <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
+        </div>
+      </div>
+
       <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
       <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
 
@@ -59,7 +56,7 @@
         <p class="hero-copy" id="heroMessage">Um aninho de amor, descobertas e muitos sorrisos. Venha celebrar esse dia especial com a Esther Vitória e sua família.</p>
 
         <div class="hero-actions">
-          <a class="button primary" href="#detalhes">Ver data e local</a>
+          <a class="button primary" href="#confirmacao">Confirmar presença</a>
           <a class="text-link" href="#jardim">Entrar no jardim <span aria-hidden="true">↓</span></a>
         </div>
       </div>
@@ -120,6 +117,43 @@
           <p id="giftMessage">Sua presença será o carinho mais bonito nesse primeiro aniversário da Esther Vitória.</p>
         </div>
       </section>
+
+      <section class="section rsvp-section" id="confirmacao" aria-labelledby="rsvpTitle">
+        <div class="section-flower" aria-hidden="true">✿</div>
+        <p class="eyebrow">CONFIRMAÇÃO</p>
+        <h2 id="rsvpTitle">Você vem celebrar com a Esther?</h2>
+        <p class="section-intro">É rapidinho. Diga seu nome e conte para a família se poderá estar presente.</p>
+
+        <form id="rsvpForm" novalidate>
+          <div class="field">
+            <label for="name">Seu nome</label>
+            <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required placeholder="Ex.: Ana Souza" />
+          </div>
+
+          <fieldset class="field presence-field">
+            <legend>Você poderá comparecer?</legend>
+            <div class="choice-row">
+              <label class="choice">
+                <input type="radio" name="attendance" value="Sim" checked />
+                <span>Sim, estarei lá</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="attendance" value="Não" />
+                <span>Não poderei ir</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="hp-field" aria-hidden="true">
+            <label for="website">Não preencha este campo</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <p class="form-note">Sua resposta será registrada na lista privada da família.</p>
+          <button class="button primary submit-button" id="submitButton" type="submit">Enviar confirmação</button>
+          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+      </section>
     </main>
 
     <footer>
@@ -129,8 +163,9 @@
     </footer>
   </div>
 
-  <script src="js/config.js?v=20"></script>
-  <script src="js/ui.js?v=20"></script>
-  <script src="js/main.js?v=20"></script>
+  <script src="js/config.js?v=21"></script>
+  <script src="js/ui.js?v=21"></script>
+  <script src="js/rsvp.js?v=21"></script>
+  <script src="js/main.js?v=21"></script>
 </body>
 </html>

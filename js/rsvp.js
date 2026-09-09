@@ -6,6 +6,7 @@ function setupForm() {
   const form = document.getElementById("rsvpForm");
   const button = document.getElementById("submitButton");
   const status = document.getElementById("formStatus");
+  if (!form || !button || !status) return;
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();

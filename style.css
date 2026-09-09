@@ -23,6 +23,7 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
   min-width: 320px;
   overflow-x: hidden;
@@ -122,14 +123,13 @@ h3 {
 }
 
 .pink-haze {
-  position: fixed;
+  position: absolute;
   z-index: 0;
   top: 0;
-  bottom: 0;
+  height: 100svh;
   width: min(29vw, 320px);
   pointer-events: none;
-  filter: blur(19px);
-  opacity: .88;
+  opacity: .7;
 }
 
 .pink-haze-left {
@@ -214,7 +214,6 @@ h3 {
   font-family: var(--serif);
   font-size: .95rem;
   letter-spacing: .035em;
-  backdrop-filter: blur(10px);
 }
 
 .garden-kicker span {
@@ -395,7 +394,6 @@ h3 {
   border: 1px solid rgba(201, 111, 153, .14);
   border-radius: 25px;
   box-shadow: 0 16px 44px rgba(166, 96, 128, .09);
-  backdrop-filter: blur(8px);
 }
 
 .countdown > div:nth-child(2) {
@@ -449,7 +447,6 @@ h3 {
   border: 1px solid rgba(201, 111, 153, .14);
   border-radius: 31px;
   box-shadow: var(--shadow);
-  backdrop-filter: blur(8px);
 }
 
 .detail-card:nth-child(2) {
@@ -505,6 +502,125 @@ h3 {
   font-size: 33px;
 }
 
+/* Confirmação */
+.rsvp-section form {
+  width: min(100%, 620px);
+  margin: 30px auto 0;
+  padding: 26px;
+  display: grid;
+  gap: 18px;
+  color: var(--text);
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+
+.field {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+label,
+legend {
+  font-size: .9rem;
+  font-weight: 800;
+}
+
+input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid rgba(184, 111, 145, .22);
+  border-radius: 16px;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--pink-strong);
+  box-shadow: 0 0 0 4px rgba(239, 182, 207, .2);
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.choice-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.choice {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.choice input {
+  width: auto;
+  min-height: auto;
+  margin: 0;
+  accent-color: var(--pink-strong);
+}
+
+.form-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.submit-button {
+  width: 100%;
+}
+
+.submit-button[disabled] {
+  cursor: wait;
+  opacity: .62;
+}
+
+.form-status {
+  min-height: 0;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.form-status.success,
+.form-status.error {
+  padding: 11px 13px;
+}
+
+.form-status.success {
+  color: #356044;
+  background: rgba(90, 143, 111, .13);
+}
+
+.form-status.error {
+  color: #803f3f;
+  background: rgba(173, 72, 72, .11);
+}
+
+.hp-field {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
 footer {
   min-height: 132px;
   display: flex;
@@ -528,11 +644,16 @@ footer span {
 
 /* Borboletas */
 .butterfly-field {
-  position: fixed;
-  z-index: 20;
-  inset: 0;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
   overflow: hidden;
   pointer-events: none;
+  transform: translateX(-50%);
+  contain: layout paint style;
 }
 
 .butterfly {
@@ -542,7 +663,6 @@ footer span {
   height: 34px;
   color: var(--pink);
   opacity: .96;
-  filter: drop-shadow(0 5px 5px rgba(83, 59, 70, .18));
   transform-origin: center;
   will-change: transform;
 }
@@ -557,10 +677,6 @@ footer span {
 
 .butterfly--pink {
   color: #efa9c8;
-}
-
-.butterfly--mint {
-  color: var(--mint);
 }
 
 .wing {
@@ -643,13 +759,6 @@ footer span {
   animation: fly-three 17s linear -7s infinite;
 }
 
-.fly-4 {
-  --fly-scale: .7;
-  top: 12vh;
-  left: calc(100vw + 18px);
-  animation: fly-four 20s linear -14s infinite;
-}
-
 .landing-butterfly {
   z-index: 3;
   right: -29px;
@@ -675,17 +784,16 @@ footer span {
   height: 5px;
   border-radius: 50%;
   background: rgba(85, 59, 71, .12);
-  filter: blur(2px);
 }
 
 @keyframes flap-left {
-  from { transform: perspective(80px) rotateY(4deg) rotateZ(-8deg); }
-  to { transform: perspective(80px) rotateY(68deg) rotateZ(-2deg); }
+  from { transform: rotate(-8deg) scaleX(1); }
+  to { transform: rotate(-2deg) scaleX(.3); }
 }
 
 @keyframes flap-right {
-  from { transform: perspective(80px) rotateY(-4deg) rotateZ(8deg); }
-  to { transform: perspective(80px) rotateY(-68deg) rotateZ(2deg); }
+  from { transform: rotate(8deg) scaleX(1); }
+  to { transform: rotate(2deg) scaleX(.3); }
 }
 
 @keyframes fly-one {
@@ -707,13 +815,6 @@ footer span {
   35% { transform: translate3d(-42vw, -13vh, 0) rotate(11deg) scale(var(--fly-scale)); }
   68% { transform: translate3d(-78vw, 8vh, 0) rotate(-11deg) scale(var(--fly-scale)); }
   100% { transform: translate3d(calc(-112vw - 140px), -17vh, 0) rotate(9deg) scale(var(--fly-scale)); }
-}
-
-@keyframes fly-four {
-  0% { transform: translate3d(0, 0, 0) rotate(9deg) scale(var(--fly-scale)); }
-  40% { transform: translate3d(-48vw, 18vh, 0) rotate(-10deg) scale(var(--fly-scale)); }
-  72% { transform: translate3d(-82vw, 4vh, 0) rotate(12deg) scale(var(--fly-scale)); }
-  100% { transform: translate3d(calc(-112vw - 130px), 27vh, 0) rotate(-8deg) scale(var(--fly-scale)); }
 }
 
 @keyframes land-on-name {
@@ -752,6 +853,10 @@ footer span {
 }
 
 @media (max-width: 700px) {
+  :root {
+    --shadow: 0 14px 38px rgba(166, 96, 128, .1);
+  }
+
   .section {
     width: min(calc(100% - 26px), 920px);
     padding: 72px 0;
@@ -855,6 +960,15 @@ footer span {
     border-radius: 30px;
   }
 
+  .rsvp-section form {
+    padding: 20px;
+    border-radius: 26px;
+  }
+
+  .choice-row {
+    grid-template-columns: 1fr;
+  }
+
   .pink-haze {
     width: 48vw;
     opacity: .74;
@@ -868,15 +982,12 @@ footer span {
   .butterfly-field .wing {
     width: 20px;
     height: 24px;
+    background: currentColor;
   }
 
   .butterfly-field .butterfly-body {
     width: 3px;
     height: 21px;
-  }
-
-  .butterfly-field .fly-4 {
-    display: none;
   }
 
   .landing-butterfly {
@@ -922,8 +1033,7 @@ footer span {
 
   .fly-1,
   .fly-2,
-  .fly-3,
-  .fly-4 {
+  .fly-3 {
     display: none;
   }
 

@@ -1,6 +1,8 @@
 function initializeInvitation() {
   applyConfig();
   startCountdown();
+  setupAttendanceToggle();
+  setupForm();
 }
 
 if (document.readyState === "loading") {
