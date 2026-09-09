@@ -1,0 +1,14 @@
+@media (max-width: 560px) {
+  .section { width: min(100% - 24px, 760px); padding: 58px 0; }
+  .hero { min-height: 92svh; }
+  .countdown { gap: 7px; }
+  .countdown > div { padding: 15px 4px; border-radius: 18px; }
+  .details-grid, .choice-row, .people-fields { grid-template-columns: 1fr; }
+  .detail-card { min-height: 180px; }
+  form { grid-template-columns: 1fr; padding: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
