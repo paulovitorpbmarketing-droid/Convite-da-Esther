@@ -1,0 +1,4 @@
+applyConfig();
+startCountdown();
+setupAttendanceToggle();
+setupForm();
