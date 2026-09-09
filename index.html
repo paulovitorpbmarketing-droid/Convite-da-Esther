@@ -6,27 +6,19 @@
   <meta name="theme-color" content="#fffafb" />
   <meta name="description" content="Convite para o Jardim Encantado do primeiro aniversário da Esther Vitória" />
   <title>Jardim Encantado da Esther Vitória • 1 aninho</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="css/section-colors.css" />
-  <link rel="stylesheet" href="css/name-animation.css" />
+  <link rel="stylesheet" href="style.css?v=14" />
+  <link rel="stylesheet" href="css/section-colors.css?v=14" />
+  <link rel="stylesheet" href="css/name-animation.css?v=14" />
 </head>
 <body>
   <div class="pink-haze pink-haze-left" aria-hidden="true"></div>
   <div class="pink-haze pink-haze-right" aria-hidden="true"></div>
 
   <div class="butterfly-field" aria-hidden="true">
-    <div class="butterfly butterfly--aqua fly-1">
-      <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
-    </div>
-    <div class="butterfly butterfly--yellow fly-2">
-      <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
-    </div>
-    <div class="butterfly butterfly--pink fly-3">
-      <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
-    </div>
-    <div class="butterfly butterfly--mint fly-4">
-      <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
-    </div>
+    <div class="butterfly butterfly--aqua fly-1"><span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span></div>
+    <div class="butterfly butterfly--yellow fly-2"><span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span></div>
+    <div class="butterfly butterfly--pink fly-3"><span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span></div>
+    <div class="butterfly butterfly--mint fly-4"><span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span></div>
   </div>
 
   <div class="page-shell">
@@ -35,20 +27,13 @@
         <p class="garden-kicker"><span>✿</span> Jardim Encantado <span>✿</span></p>
         <p class="eyebrow">UM CONVITE FLORESCEU PARA VOCÊ</p>
 
-        <div class="photo-frame" id="photoFrame" hidden>
-          <img id="babyPhoto" alt="Foto da Esther Vitória" />
-        </div>
+        <div class="photo-frame" id="photoFrame" hidden><img id="babyPhoto" alt="Foto da Esther Vitória" /></div>
 
-        <div class="baby-icon" id="babyIcon" aria-hidden="true">
-          <span class="mini-flower">✿</span>
-          <strong>1</strong>
-        </div>
+        <div class="baby-icon" id="babyIcon" aria-hidden="true"><span class="mini-flower">✿</span><strong>1</strong></div>
 
         <div class="name-wrap">
           <h1><span id="babyName">Esther Vitória</span></h1>
-          <div class="butterfly butterfly--pink landing-butterfly" aria-hidden="true">
-            <span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span>
-          </div>
+          <div class="butterfly butterfly--pink landing-butterfly" aria-hidden="true"><span class="wing wing-left"></span><span class="butterfly-body"></span><span class="wing wing-right"></span></div>
         </div>
 
         <p class="age-line">vai completar seu <strong id="babyAge">1 aninho</strong></p>
@@ -84,61 +69,22 @@
         <p class="eyebrow">GUARDE ESSA DATA</p>
         <h2 id="detailsTitle">Onde a magia vai acontecer</h2>
         <div class="details-grid">
-          <article class="detail-card">
-            <span class="detail-icon" aria-hidden="true">✿</span>
-            <h3>Quando</h3>
-            <p id="dateText">02 de outubro de 2026</p>
-            <p id="timeText">Horário em breve</p>
-          </article>
-          <article class="detail-card">
-            <span class="detail-icon" aria-hidden="true">⌖</span>
-            <h3>Onde</h3>
-            <p id="venueName">Local em breve</p>
-            <p id="venueAddress">O endereço será informado assim que estiver definido.</p>
-          </article>
+          <article class="detail-card"><span class="detail-icon" aria-hidden="true">✿</span><h3>Quando</h3><p id="dateText">02 de outubro de 2026</p><p id="timeText">Horário em breve</p></article>
+          <article class="detail-card"><span class="detail-icon" aria-hidden="true">⌖</span><h3>Onde</h3><p id="venueName">Local em breve</p><p id="venueAddress">O endereço será informado assim que estiver definido.</p></article>
         </div>
         <a class="button secondary" id="mapsButton" href="#" target="_blank" rel="noopener noreferrer" hidden>Abrir no mapa</a>
       </section>
 
-      <section class="section note-section">
-        <div class="note-card">
-          <span class="note-symbol" aria-hidden="true">♡</span>
-          <p class="eyebrow">COM CARINHO</p>
-          <h2>O melhor presente é ter você nesse jardim</h2>
-          <p id="giftMessage">Sua presença vai deixar o primeiro aniversário da Esther Vitória ainda mais especial.</p>
-        </div>
-      </section>
+      <section class="section note-section"><div class="note-card"><span class="note-symbol" aria-hidden="true">♡</span><p class="eyebrow">COM CARINHO</p><h2>O melhor presente é ter você nesse jardim</h2><p id="giftMessage">Sua presença vai deixar o primeiro aniversário da Esther Vitória ainda mais especial.</p></div></section>
 
       <section class="section rsvp-section" id="confirmacao" aria-labelledby="rsvpTitle">
         <p class="eyebrow">CONFIRMAÇÃO</p>
         <h2 id="rsvpTitle">Você vem celebrar com a Esther?</h2>
         <p class="section-intro">É rapidinho. Basta dizer seu nome e confirmar se poderá estar presente.</p>
-
         <form id="rsvpForm" novalidate>
-          <div class="field full">
-            <label for="name">Seu nome</label>
-            <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required placeholder="Ex.: Ana Souza" />
-          </div>
-
-          <fieldset class="field full presence-field">
-            <legend>Você poderá comparecer?</legend>
-            <div class="choice-row">
-              <label class="choice">
-                <input type="radio" name="attendance" value="Sim" checked />
-                <span>Sim, estarei lá</span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="attendance" value="Não" />
-                <span>Não poderei ir</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <div class="hp-field" aria-hidden="true">
-            <label for="website">Não preencha este campo</label>
-            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
-          </div>
-
+          <div class="field full"><label for="name">Seu nome</label><input id="name" name="name" type="text" autocomplete="name" maxlength="80" required placeholder="Ex.: Ana Souza" /></div>
+          <fieldset class="field full presence-field"><legend>Você poderá comparecer?</legend><div class="choice-row"><label class="choice"><input type="radio" name="attendance" value="Sim" checked /><span>Sim, estarei lá</span></label><label class="choice"><input type="radio" name="attendance" value="Não" /><span>Não poderei ir</span></label></div></fieldset>
+          <div class="hp-field" aria-hidden="true"><label for="website">Não preencha este campo</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
           <p class="form-note">Sua resposta será registrada na lista privada da família.</p>
           <button class="button primary submit-button" id="submitButton" type="submit">Enviar confirmação</button>
           <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
@@ -146,14 +92,12 @@
       </section>
     </main>
 
-    <footer>
-      <p>Jardim Encantado da Esther Vitória ♡</p>
-    </footer>
+    <footer><p>Jardim Encantado da Esther Vitória ♡</p></footer>
   </div>
 
-  <script src="js/config.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/rsvp.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/config.js?v=14"></script>
+  <script src="js/ui.js?v=14"></script>
+  <script src="js/rsvp.js?v=14"></script>
+  <script src="js/main.js?v=14"></script>
 </body>
 </html>
