@@ -1,5 +1,7 @@
 function renderAnimatedName(name) {
   const element = document.getElementById("babyName");
+
+  element.classList.remove("is-revealing");
   element.textContent = "";
   element.setAttribute("aria-label", name);
   element.classList.add("animated-name");
@@ -18,6 +20,12 @@ function renderAnimatedName(name) {
     }
 
     element.appendChild(span);
+  });
+
+  // Força o navegador a renderizar o estado inicial antes de iniciar a animação.
+  void element.offsetWidth;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => element.classList.add("is-revealing"));
   });
 }
 
