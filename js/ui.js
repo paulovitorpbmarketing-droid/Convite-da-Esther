@@ -1,6 +1,29 @@
+function renderAnimatedName(name) {
+  const element = document.getElementById("babyName");
+  element.textContent = "";
+  element.setAttribute("aria-label", name);
+  element.classList.add("animated-name");
+
+  [...name].forEach((char, index) => {
+    const span = document.createElement("span");
+    span.setAttribute("aria-hidden", "true");
+    span.style.setProperty("--i", index);
+
+    if (char === " ") {
+      span.className = "name-space";
+      span.innerHTML = "&nbsp;";
+    } else {
+      span.className = "name-letter";
+      span.textContent = char;
+    }
+
+    element.appendChild(span);
+  });
+}
+
 function applyConfig() {
   document.title = `Convite • ${CONFIG.babyName}`;
-  document.getElementById("babyName").textContent = CONFIG.babyName;
+  renderAnimatedName(CONFIG.babyName);
   document.getElementById("babyAge").textContent = CONFIG.babyAge;
   document.getElementById("heroMessage").textContent = CONFIG.heroMessage;
   document.getElementById("dateText").textContent = CONFIG.dateText;
