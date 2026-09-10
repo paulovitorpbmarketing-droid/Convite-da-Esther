@@ -17,5 +17,5 @@ const CONFIG = {
   babyPhoto: "",
 
   // Será preenchido depois com a URL /exec do Google Apps Script.
-  rsvpEndpoint: "COLE_AQUI_A_URL_DO_APPS_SCRIPT"
+  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbwAc5MrHHC1m2MqYmk2thPpO4gsf36p34iM1-kWxTVRN3xAGo-6UgBV_TxSQfKCpWECIQ/exec"
 };

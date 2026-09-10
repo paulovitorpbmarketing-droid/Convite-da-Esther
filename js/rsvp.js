@@ -1,7 +1,3 @@
-function setupAttendanceToggle() {
-  // O formulário foi simplificado: nome + confirmação de presença.
-}
-
 function setupForm() {
   const form = document.getElementById("rsvpForm");
   const button = document.getElementById("submitButton");
@@ -27,9 +23,6 @@ function setupForm() {
     const payload = new URLSearchParams({
       name: String(formData.get("name") || "").trim(),
       attendance,
-      adults: attendance === "Sim" ? "1" : "0",
-      children: "0",
-      message: "",
       website: String(formData.get("website") || ""),
       source: window.location.href
     });

@@ -2,7 +2,6 @@ function initializeInvitation() {
   applyConfig();
   startCountdown();
   setupHeroMotion();
-  setupAttendanceToggle();
   setupForm();
 }
 

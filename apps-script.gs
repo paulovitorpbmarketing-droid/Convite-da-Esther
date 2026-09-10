@@ -1,5 +1,6 @@
-const SPREADSHEET_ID = "COLE_AQUI_O_ID_DA_PLANILHA";
+const SPREADSHEET_ID = "1IUXLTD1FUg7BXzpfahkuDMptUImpa9mQGJVfzPMDcVU";
 const SHEET_NAME = "Confirmacoes";
+const HEADER_ROW = 5;
 
 function doPost(e) {
   try {
@@ -10,22 +11,21 @@ function doPost(e) {
     const sheet = getSheet_();
     ensureHeader_(sheet);
 
-    const adults = data.attendance === "Sim" ? number_(data.adults) : 0;
-    const children = data.attendance === "Sim" ? number_(data.children) : 0;
-    const total = adults + children;
+    const lock = LockService.getScriptLock();
+    lock.waitLock(10000);
 
-    sheet.appendRow([
-      new Date(),
-      safeCell_(data.name),
-      safeCell_(data.attendance),
-      adults,
-      children,
-      total,
-      safeCell_(data.message || ""),
-      safeCell_(data.source || "")
-    ]);
+    try {
+      sheet.appendRow([
+        new Date(),
+        safeCell_(data.name),
+        safeCell_(data.attendance),
+        safeCell_(data.source || "")
+      ]);
+    } finally {
+      lock.releaseLock();
+    }
 
-    return json_({ ok: true, total: total });
+    return json_({ ok: true });
   } catch (error) {
     return json_({ ok: false, error: String(error.message || error) });
   }
@@ -47,22 +47,15 @@ function getSheet_() {
 }
 
 function ensureHeader_(sheet) {
-  if (sheet.getLastRow() > 0) return;
+  const headers = ["Data/Hora", "Nome", "Presença", "Origem"];
+  const range = sheet.getRange(HEADER_ROW, 1, 1, headers.length);
+  const current = range.getDisplayValues()[0];
 
-  sheet.appendRow([
-    "Data/Hora",
-    "Nome",
-    "Presença",
-    "Adultos",
-    "Crianças",
-    "Total",
-    "Recado",
-    "Origem"
-  ]);
-
-  sheet.getRange(1, 1, 1, 8).setFontWeight("bold");
-  sheet.setFrozenRows(1);
-  sheet.autoResizeColumns(1, 8);
+  if (current.every(value => !String(value).trim())) {
+    range.setValues([headers]);
+    range.setFontWeight("bold");
+    sheet.setFrozenRows(HEADER_ROW);
+  }
 }
 
 function parseBody_(e) {
@@ -83,25 +76,11 @@ function parseBody_(e) {
 function validate_(data) {
   const name = String(data.name || "").trim();
   const attendance = String(data.attendance || "");
-  const message = String(data.message || "");
+  const source = String(data.source || "").trim();
 
   if (name.length < 2 || name.length > 80) throw new Error("Nome inválido.");
   if (!["Sim", "Não"].includes(attendance)) throw new Error("Resposta de presença inválida.");
-  if (message.length > 300) throw new Error("Recado muito longo.");
-
-  if (attendance === "Sim") {
-    const adults = number_(data.adults);
-    const children = number_(data.children);
-    if (adults < 0 || adults > 20 || children < 0 || children > 20 || adults + children < 1) {
-      throw new Error("Quantidade de pessoas inválida.");
-    }
-  }
-}
-
-function number_(value) {
-  const n = Number(value);
-  if (!Number.isInteger(n)) throw new Error("Quantidade inválida.");
-  return n;
+  if (source.length > 500) throw new Error("Origem inválida.");
 }
 
 function safeCell_(value) {
